@@ -38,6 +38,10 @@ python3 -m http.server 8000
 
 Then open http://localhost:8000.
 
+## Documentation
+
+- [Project synopsis (DOCX)](docs/Parking_Management_System_Final.docx) — problem statement, objectives, scope, workflow, and data structures used.
+
 ## Getting Started
 
 Setup instructions will be added as modules are implemented.
