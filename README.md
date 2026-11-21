@@ -33,6 +33,8 @@ The repository ships with deployment files, so the demo can run on a permanent U
 
 ### Render (free permanent URL)
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/vijaykhati60-spec/smart-parking-ai)
+
 1. Open https://dashboard.render.com/blueprints and connect this repository.
 2. Render reads `render.yaml` and creates the `parkease-demo` web service.
 3. Your permanent URL will be `https://parkease-demo.onrender.com` (or the name Render assigns).
