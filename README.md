@@ -1,58 +1,87 @@
-# Smart Parking AI
+# ParkEase — Smart Parking Management System
 
-An AI-powered smart parking management system that helps drivers and operators find, reserve, and manage parking spaces in real time.
+ParkEase is a smart parking management system built from three parts: a browser dashboard
+(HTML/CSS/JavaScript), a Flask REST API, and a C engine that manages slots with core data
+structures (a stack for parked vehicles and a circular queue for waiting vehicles), backed by
+MySQL.
 
-## Overview
+## Features
 
-Smart Parking AI combines computer vision, occupancy prediction, and a management dashboard to:
+- Register and log in with salted, hashed passwords
+- Live parking slot status and waiting queue
+- Park and release vehicles with automatic fee calculation (₹20/hour)
+- Waiting queue when the lot is full
+- Exit history and revenue tracking
+- Flask serves the web UI and invokes the compiled C program for slot operations
 
-- Detect available parking spaces from camera feeds
-- Predict occupancy trends and peak hours
-- Let drivers search, reserve, and pay for spots
-- Give operators live dashboards, analytics, and alerts
+## Project structure
 
-## Planned Modules
+```text
+.
+├── index.html          # Web dashboard
+├── script.js           # Frontend logic and API calls
+├── style.css           # Dashboard styling
+├── backend/
+│   ├── app.py          # Flask API server
+│   ├── parking.c       # C engine (stack + circular queue + MySQL)
+│   ├── parking_backup.c
+│   ├── db_test.c
+│   ├── parking.exe     # Compiled C engine used by app.py
+│   ├── parkease_gui.exe
+│   └── db_test.exe
+└── demo/               # Standalone interactive UI demo
+```
 
-| Module | Purpose |
-| --- | --- |
-| `detection/` | Vehicle and free-space detection from images/video |
-| `occupancy/` | Occupancy prediction and forecasting models |
-| `api/` | REST API for slots, reservations, and payments |
-| `dashboard/` | Operator and driver web interface |
-| `docs/` | Architecture, API reference, and setup guides |
+## Setup
+
+Prerequisites: Python 3, Flask, `mysql-connector-python`, MySQL, and a C compiler with the
+MySQL connector library (MSYS2/UCRT64 on Windows).
+
+1. Create the MySQL database and application user referenced in `backend/app.py`.
+2. Compile the C engine:
+
+   ```bash
+   cd backend
+   gcc parking.c -o parking.exe $(mysql_config --cflags --libs)
+   ```
+
+3. Install dependencies and start the server:
+
+   ```bash
+   pip install flask mysql-connector-python
+   cd backend
+   python app.py
+   ```
+
+4. Open http://localhost:5000.
+
+`backend/app.py` expects Windows paths for the MySQL connector DLL
+(`C:\msys64\ucrt64\bin`) and for `backend/parking.exe`.
 
 ## Demo
 
 **🔗 Live demo:** https://work-1-hgyewkuurhwpeytp.prod-runtime.all-hands.dev/
 
 A zero-dependency interactive demo lives in [`demo/index.html`](demo/index.html). It simulates
-48 parking slots across four zones with live arrivals/departures, AI occupancy forecasts, and a
+48 parking slots across four zones with live arrivals/departures, occupancy forecasts, and a
 reservation flow.
-
-Run it locally:
 
 ```bash
 cd demo
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000.
+## Security note
 
-## Documentation
+Database credentials are currently hardcoded in `backend/app.py` and `backend/parking.c`.
+Move them to environment variables before sharing the repository publicly.
 
-- [Project synopsis (DOCX)](docs/Parking_Management_System_Final.docx) — problem statement, objectives, scope, workflow, and data structures used.
+## Tech stack
 
-## Getting Started
-
-Setup instructions will be added as modules are implemented.
-
-## Tech Stack (proposed)
-
-- **Backend:** Python (FastAPI)
-- **AI/CV:** PyTorch, OpenCV
-- **Frontend:** React
-- **Database:** PostgreSQL
-- **Deployment:** Docker
+- **Frontend:** HTML, CSS, vanilla JavaScript
+- **API:** Python (Flask)
+- **Core engine:** C (stack, circular queue, linked records)
+- **Database:** MySQL
 
 ## License
 
