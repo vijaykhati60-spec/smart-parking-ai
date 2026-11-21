@@ -23,6 +23,7 @@ MySQL.
 ├── style.css           # Dashboard styling
 ├── backend/
 │   ├── app.py          # Flask API server
+│   ├── demo_app.py     # In-memory demo server (no MySQL required)
 │   ├── parking.c       # C engine (stack + circular queue + MySQL)
 │   ├── parking_backup.c
 │   ├── db_test.c
@@ -58,11 +59,30 @@ MySQL connector library (MSYS2/UCRT64 on Windows).
 `backend/app.py` expects Windows paths for the MySQL connector DLL
 (`C:\msys64\ucrt64\bin`) and for `backend/parking.exe`.
 
-## Demo
+## Live demo
 
-**🔗 Live demo:** https://work-1-hgyewkuurhwpeytp.prod-runtime.all-hands.dev/
+**🔗 ParkEase app:** https://work-1-hgyewkuurhwpeytp.prod-runtime.all-hands.dev/
 
-A zero-dependency interactive demo lives in [`demo/index.html`](demo/index.html). It simulates
+The hosted demo runs the same dashboard and API as `backend/app.py`, backed by an in-memory
+store (`backend/demo_app.py`) so it works without MySQL or the Windows `parking.exe`. Data
+resets when the server restarts.
+
+- Demo login: `demo` / `demo123` (or click **Login / Register** to create an account)
+- Try **Vehicle Entry** / **Vehicle Exit** to see slots, the waiting queue, and the bill update
+
+Run the demo locally:
+
+```bash
+pip install flask
+cd backend
+python demo_app.py
+```
+
+Then open http://localhost:12000.
+
+## Interactive UI demo
+
+A separate zero-dependency demo lives in [`demo/index.html`](demo/index.html). It simulates
 48 parking slots across four zones with live arrivals/departures, occupancy forecasts, and a
 reservation flow.
 
