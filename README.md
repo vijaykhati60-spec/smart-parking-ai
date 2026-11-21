@@ -21,6 +21,21 @@ Smart Parking AI combines computer vision, occupancy prediction, and a managemen
 | `dashboard/` | Operator and driver web interface |
 | `docs/` | Architecture, API reference, and setup guides |
 
+## Demo
+
+A zero-dependency interactive demo lives in [`demo/index.html`](demo/index.html). It simulates
+48 parking slots across four zones with live arrivals/departures, AI occupancy forecasts, and a
+reservation flow.
+
+Run it locally:
+
+```bash
+cd demo
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000.
+
 ## Getting Started
 
 Setup instructions will be added as modules are implemented.
