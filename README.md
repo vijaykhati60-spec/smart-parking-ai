@@ -20,6 +20,37 @@ The hosted demo runs the same dashboard and API as `backend/app.py`, backed by a
 store (`backend/demo_app.py`) so it works without MySQL or the Windows `parking.exe`. Data
 resets when the server restarts.
 
+## Permanent deployment
+
+The repository ships with deployment files, so the demo can run on a permanent URL:
+
+| File | Purpose |
+| --- | --- |
+| `requirements.txt` | Python dependencies (Flask, Gunicorn, MySQL connector) |
+| `Procfile` | Process command for Render/Heroku-style hosts |
+| `render.yaml` | Render Blueprint (free web service) |
+| `Dockerfile` | Container image for Railway, Fly.io, or any Docker host |
+
+### Render (free permanent URL)
+
+1. Open https://dashboard.render.com/blueprints and connect this repository.
+2. Render reads `render.yaml` and creates the `parkease-demo` web service.
+3. Your permanent URL will be `https://parkease-demo.onrender.com` (or the name Render assigns).
+
+Free instances sleep after inactivity, so the first request may take a few seconds.
+
+### Docker (any host)
+
+```bash
+docker build -t parkease .
+docker run -p 8000:8000 parkease
+```
+
+Then open http://localhost:8000.
+
+The demo keeps data in memory, so it resets on restart or redeploy. To persist data, deploy the
+MySQL-backed `backend/app.py` instead and point it at a managed MySQL instance.
+
 ## Features
 
 - Register and log in with salted PBKDF2-SHA256 password hashes
@@ -49,6 +80,10 @@ resets when the server restarts.
 ├── index.html              # Login page + dashboard
 ├── script.js               # Frontend logic and API calls
 ├── style.css               # Dashboard styling
+├── requirements.txt        # Python dependencies
+├── Procfile                # Process command for Render/Heroku-style hosts
+├── render.yaml             # Render Blueprint (free web service)
+├── Dockerfile              # Container image for Railway/Fly/any Docker host
 ├── backend/
 │   ├── app.py              # Flask API server (MySQL + C engine)
 │   ├── demo_app.py         # In-memory demo server (no MySQL required)
