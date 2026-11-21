@@ -23,6 +23,8 @@ Smart Parking AI combines computer vision, occupancy prediction, and a managemen
 
 ## Demo
 
+**🔗 Live demo:** https://work-1-hgyewkuurhwpeytp.prod-runtime.all-hands.dev/
+
 A zero-dependency interactive demo lives in [`demo/index.html`](demo/index.html). It simulates
 48 parking slots across four zones with live arrivals/departures, AI occupancy forecasts, and a
 reservation flow.
