@@ -7,6 +7,7 @@ MySQL or the Windows parking.exe binary. All data resets when the process stops.
 import hashlib
 import hmac
 import math
+import os
 import secrets
 import threading
 from datetime import datetime, timedelta
@@ -287,4 +288,4 @@ def exit_history():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=12000, debug=False)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 12000)), debug=False)
