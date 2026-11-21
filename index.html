@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkEase - Parking Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-box" id="loginPage">
+    <h1>🅿 ParkEase</h1>
+    <p>Smart Parking Management System</p>
+
+    <h2 id="formTitle">Login</h2>
+    <input id="username" placeholder="Username" maxlength="19">
+    <input id="password" type="password" placeholder="Password"
+           maxlength="50">
+    <input id="vehicleNumber" placeholder="Vehicle Number"
+           maxlength="19">
+
+    <button onclick="authenticate()">Login / Register</button>
+    <p id="loginMessage"></p>
+    <small>Demo prototype — use Register to create an account.</small>
+</div>
+
+<div id="dashboard" class="hidden">
+    <aside class="sidebar">
+        <h2>🅿 ParkEase</h2>
+        <p>SMART PARKING</p>
+        <a href="#home">Dashboard</a>
+        <a href="#parking">Parking Slots</a>
+        <a href="#manage">Vehicle Management</a>
+        <a href="#queueSection">Waiting Queue</a>
+        <a href="#historySection">Exit History</a>
+        <button class="logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <main id="home">
+        <header>
+            <div>
+                <h1>Parking Dashboard</h1>
+                <p>Welcome, <span id="welcomeUser"></span>!</p>
+            </div>
+            <span class="online">● System Online</span>
+        </header>
+
+        <section class="stats">
+            <div class="stat">
+                <p>Total Slots</p>
+                <h2>5</h2>
+            </div>
+            <div class="stat">
+                <p>Available</p>
+                <h2 id="available">5</h2>
+            </div>
+            <div class="stat">
+                <p>Occupied</p>
+                <h2 id="occupied">0</h2>
+            </div>
+        </section>
+
+        <section class="panel" id="parking">
+            <h2>Parking Slots</h2>
+            <p>Green = Available | Red = Occupied</p>
+            <div id="slots" class="slots"></div>
+        </section>
+
+        <section class="panel" id="manage">
+            <h2>Vehicle Management</h2>
+            <label for="vehicleInput">Vehicle Number</label>
+            <input id="vehicleInput" placeholder="e.g. UK04AB1234"
+                   maxlength="19">
+            <div class="buttons">
+                <button onclick="entry()">Vehicle Entry</button>
+                <button class="red" onclick="exitVehicle()">Vehicle Exit</button>
+            </div>
+            <p id="message" aria-live="polite"></p>
+        </section>
+
+        <section class="panel" id="queueSection">
+            <h2>Waiting Queue (FIFO)</h2>
+            <ul id="queueList"></ul>
+        </section>
+
+        <section class="panel" id="historySection">
+            <h2>Exit History (Stack)</h2>
+            <ul id="historyList"></ul>
+        </section>
+
+        <footer>Parking Management System | Phase 2</footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -29,3 +29,5 @@ data/processed/
 .idea/
 .vscode/
 .DS_Store
+desktop.ini
+Thumbs.db
